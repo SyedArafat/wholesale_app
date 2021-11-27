@@ -48,7 +48,7 @@ if($num>0){
     echo "</table>";
 
     $page_url="product-index.php?";
-    $total_rows = $product->countAll();
+    $total_rows = $product->countAll(true);
 
     // actual paging buttons
     include_once '_paging.php';

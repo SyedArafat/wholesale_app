@@ -113,3 +113,7 @@ div#blueimp-gallery div.modal{ overflow: visible; }
 .margin-bottom-15 {
     margin-bottom: 15px;
 }
+
+.form-group-custom {
+    margin-bottom: 33px;
+}

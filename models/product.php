@@ -50,9 +50,10 @@ class product
         return $stmt;
     }
 
-    public function countAll()
+    public function countAll($by_seller = false)
     {
-        $query = "SELECT id FROM " . $this->table_name . " WHERE seller_id = ". $_SESSION["user_id"];
+        $query = "SELECT id FROM " . $this->table_name;
+        if($by_seller) $query .= " WHERE seller_id = ". $_SESSION["user_id"];
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->rowCount();

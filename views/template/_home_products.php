@@ -6,7 +6,7 @@
 
 if($num>0){
 
-    echo "<table id ='productTable' class='table table-hover table-responsive table-bordered'>";
+    echo "<table id ='allProductTable' class='table table-hover table-responsive table-bordered'>";
 
     echo "<tr>";
     echo "<th>Seller Name</th>";
@@ -37,7 +37,7 @@ if($num>0){
                        data-product-price = '$price'
                        data-product-feature-image = '$feature_image'
                        data-product-secondary-image = '$secondary_image'
-                       class='btn btn-success infoU productEditButton'>
+                       class='btn btn-success infoU productBuyButton'>
                        <span class='glyphicon glyphicon-shopping-cart'></span>&nbsp; Buy</a>
 
               </td>";
@@ -54,7 +54,6 @@ if($num>0){
     include_once '_paging.php';
 }
 
-// tell the user there are no selfies
 else{
     echo "<div class='alert alert-danger'>
         <strong>No products found.</strong>

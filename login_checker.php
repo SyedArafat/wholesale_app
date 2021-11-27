@@ -1,15 +1,13 @@
 <?php
 
-// if access level was not 'Admin', redirect him to login page
-//if(isset($_SESSION['user_type']) && $_SESSION['user_type']=="Seller"){
-//    header("Location: {$home_url}views/index.php?action=logged_in_as_admin");
-//}
+if(isset($must_be_seller) && $must_be_seller == true){
+    if($_SESSION['user_type'] != "Seller")
+        header("Location: {$home_url}index.php?action=login_as_seller");
+}
 
-// if $require_login was set and value is 'true'
 if(isset($require_login) && $require_login==true){
-    // if user not yet logged in, redirect to login page
     if(!isset($_SESSION['user_type'])){
-        header("Location: {$home_url}/views/login.php?action=please_login");
+        header("Location: {$home_url}views/login.php?action=please_login");
     }
 }
 

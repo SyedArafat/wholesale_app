@@ -3,7 +3,6 @@
     <div class="container-fluid">
 
         <div class="navbar-header">
-            <!-- to enable navigation dropdown when viewed in mobile device -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -11,24 +10,25 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <!-- Change "Your Site" to your site name -->
-            <a class="navbar-brand" href="<?php echo $home_url; ?>">Your Site</a>
+            <a class="navbar-brand" href="<?php echo $home_url; ?>">Wholesale App</a>
         </div>
 
         <div class="navbar-collapse collapse">
+            <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === Statics::USER_TYPE_SELLER) { ?>
             <ul class="nav navbar-nav">
-                <!-- link to the "Cart" page, highlight if current page is cart.php -->
                 <li <?php echo $page_title=="Index" ? "class='active'" : ""; ?>>
                     <a href="<?php echo $home_url; ?>">Home</a>
                 </li>
-                <li <?php echo $page_title=="ProductIndex" ? "class='active'" : ""; ?>>
+                <li <?php echo $page_title=="Product Index" ? "class='active'" : ""; ?>>
                     <a href="<?php echo $home_url; ?>views/product-index.php">Products</a>
                 </li>
+                <li <?php echo $page_title=="Order List" ? "class='active'" : ""; ?>>
+                    <a href="<?php echo $home_url; ?>views/order-list.php">Orders</a>
+                </li>
             </ul>
+            <?php } ?>
 
             <?php
-            // check if users / customer was logged in
-            // if user was logged in, show "Edit Profile", "Orders" and "Logout" options
             if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true){
             ?>
                 <ul class="nav navbar-nav navbar-right">
@@ -48,7 +48,6 @@
             <?php
             }
 
-            // if user was not logged in, show the "login" and "register" options
             else{
                 ?>
                 <ul class="nav navbar-nav navbar-right">
@@ -68,7 +67,7 @@
             }
             ?>
 
-        </div><!--/.nav-collapse -->
+        </div>
 
     </div>
 </div>

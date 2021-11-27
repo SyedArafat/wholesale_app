@@ -19,24 +19,26 @@ include_once 'views/layout/layout_head.php';
 
 echo "<div class='col-md-12'>";
 
-// to prevent undefined index notice
 $action = $_GET['action'] ?? "";
 
-// if login was successful
 if($action=='login_success'){
     echo "<div class='alert alert-info'>";
     echo "<strong>Hi " . $_SESSION['name'] . ", welcome back!</strong>";
     echo "</div>";
 }
 
-// if user is already logged in, shown when user tries to access the login page
 else if($action=='already_logged_in'){
     echo "<div class='alert alert-info'>";
     echo "<strong>You are already logged in.</strong>";
     echo "</div>";
 }
 
-// content once logged in
+else if($action=='login_as_seller'){
+    echo "<div class='alert alert-danger'>";
+    echo "<strong>You do not have required access to see the page.</strong>";
+    echo "</div>";
+}
+
 echo "<div class='alert alert-info'>";
 echo "Buy your desired products.";
 echo "</div>";

@@ -8,9 +8,9 @@ $page_title = "Product Index";
 
 // include login checker
 $require_login = true;
+$must_be_seller = true;
 include_once "../login_checker.php";
 
-// include classes
 include_once '../config/database.php';
 include_once '../models/product.php';
 

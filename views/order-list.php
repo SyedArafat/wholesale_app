@@ -25,3 +25,17 @@ $order = new order($db);
 include_once 'layout/layout_head.php';
 
 echo "<div class='col-md-12'>";
+
+$stmt = $order->readAllBySeller($from_record_num, $records_per_page);
+
+$num = $stmt->rowCount();
+
+$page_url="order-list.php?";
+
+// include products table HTML template
+include_once "template/_read_orders.php";
+
+echo "</div>";
+
+// include page footer HTML
+include_once "layout/layout_foot.php";

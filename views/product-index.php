@@ -57,13 +57,10 @@ include_once 'layout/layout_head.php';
 
 echo "<div class='col-md-12'>";
 
-// read all users from the database
 $stmt = $product->readAllBySeller($from_record_num, $records_per_page);
 
-// count retrieved users
 $num = $stmt->rowCount();
 
-// to identify page for paging
 $page_url="product-index.php?";
 
 // include products table HTML template

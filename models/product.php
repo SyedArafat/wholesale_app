@@ -26,6 +26,20 @@ class product
         $query = $this->getAllProductsQuery();
         $stmt = $this->conn->prepare( $query );
 
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+
+
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    public function readAllBySeller($from_record_num, $records_per_page)
+    {
+        $query = $this->getProductsBySellerQuery();
+        $stmt = $this->conn->prepare( $query );
+
         $stmt->bindParam(1, $_SESSION["user_id"], PDO::PARAM_INT);
         $stmt->bindParam(2, $from_record_num, PDO::PARAM_INT);
         $stmt->bindParam(3, $records_per_page, PDO::PARAM_INT);
@@ -44,12 +58,20 @@ class product
         return $stmt->rowCount();
     }
 
-    private function getAllProductsQuery(): string
+    private function getProductsBySellerQuery(): string
     {
         return "SELECT $this->table_name.id, $this->user_table.name as seller_name, product_title, price, feature_image,
             secondary_image, $this->table_name.created_at, $this->table_name.updated_at
             FROM " . $this->table_name . " LEFT JOIN $this->user_table ON $this->table_name.seller_id = $this->user_table.id 
             WHERE $this->table_name.seller_id = ? ORDER BY $this->table_name.id DESC LIMIT ?, ?";
+    }
+
+    private function getAllProductsQuery(): string
+    {
+        return "SELECT $this->table_name.id, $this->user_table.name as seller_name, product_title, price, feature_image,
+            secondary_image, $this->table_name.created_at, $this->table_name.updated_at
+            FROM " . $this->table_name . " LEFT JOIN $this->user_table ON $this->table_name.seller_id = $this->user_table.id 
+            ORDER BY $this->table_name.id DESC LIMIT ?, ?";
     }
 
     public function create(): bool

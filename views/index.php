@@ -3,19 +3,24 @@
 include_once "../config/core.php";
 
 // set page title
-$page_title="Index";
+$page_title="Home";
 
 // include login checker
 $require_login=true;
 include_once "../login_checker.php";
 
+// include classes
+include_once '../config/database.php';
+include_once '../models/product.php';
+
 // include page header HTML
 include_once 'layout/layout_head.php';
+
 
 echo "<div class='col-md-12'>";
 
 // to prevent undefined index notice
-$action = isset($_GET['action']) ? $_GET['action'] : "";
+$action = $_GET['action'] ?? "";
 
 // if login was successful
 if($action=='login_success'){
@@ -33,8 +38,31 @@ else if($action=='already_logged_in'){
 
 // content once logged in
 echo "<div class='alert alert-info'>";
-echo "Content when logged in will be here. For example, your premium products or services.";
+echo "Buy your desired products.";
 echo "</div>";
+
+echo "</div>";
+
+// get database connection
+$database = new Database();
+$db = $database->getConnection();
+
+// initialize objects
+$product = new Product($db);
+
+echo "<div class='col-md-12'>";
+
+// read all users from the database
+$stmt = $product->readAll($from_record_num, $records_per_page);
+
+// count retrieved users
+$num = $stmt->rowCount();
+
+// to identify page for paging
+$page_url="product-index.php?";
+
+// include products table HTML template
+include_once "template/_home_products.php";
 
 echo "</div>";
 

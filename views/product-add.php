@@ -57,6 +57,12 @@ include_once 'layout/layout_head.php';
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Wholesale Price:</label>
+        <div class="col-sm-10">
+            <input type="number" readonly class="form-control" id="wholesale_price">
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-sm-2" for="email">Feature Image:</label>
         <div class="col-sm-10">
             <input type="file" class="form-control" id="feature_image" placeholder="Feature Image" name="feature_image">
@@ -103,6 +109,12 @@ include_once "layout/layout_foot.php";
                 }
             });
         });
+
+        $("form#product_add").on('keyup', '#price', function (){
+            let wholesale_price = (!isNaN(this.value)) ? (this.value - (this.value * 10/100)) : 0;
+            $("input#wholesale_price").val(wholesale_price);
+
+        })
     });
 
 </script>

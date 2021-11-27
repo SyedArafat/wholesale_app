@@ -3,7 +3,7 @@
 <span>
 
 <?php
-// display the table if the number of users retrieved was greater than zero
+
 if($num>0){
 
     echo "<table id ='productTable' class='table table-hover table-responsive table-bordered'>";
@@ -37,8 +37,8 @@ if($num>0){
                        data-product-price = '$price'
                        data-product-feature-image = '$feature_image'
                        data-product-secondary-image = '$secondary_image'
-                       class='btn btn-info infoU productEditButton'>
-                       <span class='glyphicon glyphicon-file'></span>Edit</a>
+                       class='btn btn-success infoU productEditButton'>
+                       <span class='glyphicon glyphicon-shopping-cart'></span>&nbsp; Buy</a>
 
               </td>";
 
@@ -47,15 +47,14 @@ if($num>0){
 
     echo "</table>";
 
-    $page_url="product-index.php?";
+    $page_url="index.php?";
     $total_rows = $product->countAll();
 
     // actual paging buttons
     include_once '_paging.php';
-
-    include_once '_update_product_modal.php';
 }
 
+// tell the user there are no selfies
 else{
     echo "<div class='alert alert-danger'>
         <strong>No products found.</strong>
@@ -67,5 +66,6 @@ else{
 <script>
 
 </script>
+
 
 

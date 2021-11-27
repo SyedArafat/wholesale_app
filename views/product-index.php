@@ -58,7 +58,7 @@ include_once 'layout/layout_head.php';
 echo "<div class='col-md-12'>";
 
 // read all users from the database
-$stmt = $product->readAll($from_record_num, $records_per_page);
+$stmt = $product->readAllBySeller($from_record_num, $records_per_page);
 
 // count retrieved users
 $num = $stmt->rowCount();

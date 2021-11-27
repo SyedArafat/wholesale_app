@@ -29,7 +29,7 @@ if($_POST){
     if(file_exists($_FILES['secondary_image']['tmp_name']) && is_uploaded_file($_FILES['secondary_image']['tmp_name'])) {
         $product->secondary_image = $file->uploadImageAndGetPath('secondary_image', Statics::getProductSecondaryImagePath());
         if(!$product->secondary_image) die('<label class="alert alert-danger width-100-percent" role="alert"> An error occurred while uploading the secondary image file </label>');
-    }
+    } else $product->secondary_image = null;
 
     if($product->create())
         die('<label class="alert alert-success width-100-percent" role="alert"> Success ! Product added.</label>');

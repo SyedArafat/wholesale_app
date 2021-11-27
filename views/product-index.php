@@ -45,24 +45,20 @@ include_once "layout/layout_foot.php";
 ?>
 
 <script>
-    $("#editProductModal").on("show.bs.modal", function (e) {
-        let product_title = $(e.relatedTarget).data('product-title');
-        console.log(product_title);
-
-    });
     $('#productTable').on('click', '.productEditButton', function (e){
         e.preventDefault();
+        let productId = $(this).data('product-id');
         let productTitle = $(this).data('product-title');
-        console.log(productTitle);
-        $('#editProductModal').modal('show');
-    });
+        let productPrice = $(this).data('product-price');
+        let featureImage = $(this).data('product-feature-image');
+        let secondaryImage = $(this).data('product-secondary-image');
 
-    $(document).on("click", ".open-AddBookDialog", function () {
-        var myBookId = $(this).data('id');
-        console.log(myBookId);
-        // $(".modal-body #bookId").val( myBookId );
-        // As pointed out in comments,
-        // it is unnecessary to have to manually call the modal.
-        // $('#addBookDialog').modal('show');
+        console.log(secondaryImage);
+        $('#product_id').val(productId);
+        $('#product_title').val(productTitle);
+        $('#product_price').val(productPrice);
+        $("#feature_image_display").attr("src", featureImage);
+        $("#secondary_image_display").attr("src", secondaryImage);
+        $('#editProductModal').modal('show');
     });
 </script>

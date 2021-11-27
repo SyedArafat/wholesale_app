@@ -155,6 +155,7 @@ class product
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $this->id = $row['id'];
+            $this->seller_id = $row['seller_id'];
             $this->product_title = $row['product_title'];
             $this->price = $row['price'];
             $this->feature_image = $row['feature_image'];
@@ -221,5 +222,10 @@ class product
 
               </td>
             </tr>";
+    }
+
+    public function isOwnSeller() : bool
+    {
+        return $this->seller_id == $_SESSION["user_id"];
     }
 }

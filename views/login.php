@@ -40,12 +40,12 @@ if($_POST){
         $_SESSION['name'] = $user->name;
 
         if($user->user_type=='Seller'){
-            header("Location: {$home_url}views/index.php?action=login_success");
+            header("Location: {$home_url}index.php?action=login_success");
         }
 
         // else, redirect only to 'Customer' section
         else{
-            header("Location: {$home_url}views/index.php?action=login_success");
+            header("Location: {$home_url}index.php?action=login_success");
         }
     }
 

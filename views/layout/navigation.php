@@ -39,7 +39,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <form action="logout.php" method="post">
+                            <form action="<?php echo $home_url; ?>views/logout.php" method="post">
                                 <li><button class="submit-button-logout" type="submit">Logout</button></li>
                             </form>
                         </ul>

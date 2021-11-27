@@ -6,6 +6,12 @@ class Statics
 
     const PROJECT_NAME = "wholesale_app";
 
+    const USER_TYPE_SELLER = "Seller";
+
+    const USER_TYPE_CUSTOMER = "Customer";
+
+    const PRODUCT_PURCHASE_LIMIT = 5;
+
     public static function getProductFeatureImageFullPath(): string
     {
         return "/resource/storage/products/feature_image/";

@@ -16,12 +16,22 @@ if($_POST) {
     $product = new product($db);
     $product->id = $_POST["product_id"];
 
-
     if(!$product->setProduct()) die('<label class="alert alert-danger width-100-percent" role="alert"> No product found. </label>');
-    $order->product_id = $product->id;
 
-    if($order->create())
+    if($product->isOwnSeller()) die('<label class="alert alert-danger width-100-percent" role="alert"> You can not buy your own product. </label>');
+
+    $order->product_id = $product->id;
+    $order->price = $product->price;
+
+    if(!$order->checkPurchaseLimit()) die('<label class="alert alert-danger width-100-percent" role="alert"> Product purchase limit maxed out. </label>');
+
+    if($order->create()) {
+        if($_SESSION["user_type"] === Statics::USER_TYPE_SELLER) {
+            $product->seller_id = $_SESSION["user_id"];
+            $product->create();
+        }
         die('<label class="alert alert-success width-100-percent" role="alert"> Success ! Product purchased.</label>');
+    }
     else die('<label class="alert alert-danger width-100-percent" role="alert"> Something went wrong. Try again.'.  $order->getErrors(). '</label>');
 
 }

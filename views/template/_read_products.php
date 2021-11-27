@@ -1,3 +1,7 @@
+<span>
+    <label id="post_message_box" class="width-100-percent"> </label>
+<span>
+
 <?php
 // display the table if the number of users retrieved was greater than zero
 if($num>0){

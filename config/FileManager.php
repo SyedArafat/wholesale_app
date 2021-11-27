@@ -22,4 +22,10 @@ class FileManager
     {
         return __DIR__ . "/..";
     }
+
+    public function deleteFile($file_name)
+    {
+        if(file_exists($this->getRootPath(). $file_name))
+            unlink($this->getRootPath(). $file_name);
+    }
 }

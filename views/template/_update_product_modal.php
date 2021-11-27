@@ -6,7 +6,7 @@
                 <h4 class="modal-title"><b>Update Product</b></h4>
             </div>
             <div class="modal-body">
-                <form action="/" method="post">
+                <form id="product_update" method="post">
                 <div class="row">
                     <input type="hidden" name="id" id="product_id">
                     <div class="form-group-custom">
@@ -30,7 +30,7 @@
                         <div class="col-md-9">
                             <img width="120px" id="feature_image_display" class="margin-bottom-15" src="" />
                             <br>
-                            <input class="form-control" type="file" name="feature_image" required>
+                            <input class="form-control" type="file" name="feature_image">
                         </div>
                     </div>
                     <br>
@@ -40,7 +40,7 @@
                         <div class="col-md-9">
                             <img width="120px" id="secondary_image_display" class="margin-bottom-15" src="" />
                             <br>
-                            <input class="form-control" type="file" name="secondary_image" required>
+                            <input class="form-control" type="file" name="secondary_image">
                         </div>
                     </div>
                     <br>
@@ -49,7 +49,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default btn-outline">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
             </form>
         </div>

@@ -117,4 +117,59 @@ class product
     {
         return $this->errors;
     }
+
+    public function setProduct(): bool
+    {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
+
+        $stmt = $this->conn->prepare( $query );
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(1, $this->id);
+        $stmt->execute();
+        $num = $stmt->rowCount();
+
+        if($num>0){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->id = $row['id'];
+            $this->feature_image = $row['feature_image'];
+            $this->secondary_image = $row['secondary_image'];
+            $this->created_at = $row['created_at'];
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function update()
+    {
+        $query = $this->getUpdateQuery();
+        $stmt = $this->conn->prepare($query);
+        $this->prepareData();
+        $stmt->bindParam(':product_title', $this->product_title);
+        $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':feature_image', $this->feature_image);
+        $stmt->bindParam(':secondary_image', $this->secondary_image);
+        $stmt->bindParam(':updated_at', $this->updated_at);
+        $stmt->bindParam(':id', $this->id);
+        if($stmt->execute()){
+            return true;
+        }else{
+            $this->showError($stmt);
+            return false;
+        }
+    }
+
+    private function getUpdateQuery(): string
+    {
+        return "UPDATE $this->table_name 
+            SET
+                product_title = :product_title,
+                price = :price,
+                feature_image = :feature_image,
+                secondary_image = :secondary_image,
+                updated_at = :updated_at
+            WHERE id = :id;";
+    }
 }

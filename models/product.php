@@ -132,6 +132,8 @@ class product
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $this->id = $row['id'];
+            $this->product_title = $row['product_title'];
+            $this->price = $row['price'];
             $this->feature_image = $row['feature_image'];
             $this->secondary_image = $row['secondary_image'];
             $this->created_at = $row['created_at'];
@@ -154,6 +156,7 @@ class product
         $stmt->bindParam(':updated_at', $this->updated_at);
         $stmt->bindParam(':id', $this->id);
         if($stmt->execute()){
+            $this->setProduct();
             return true;
         }else{
             $this->showError($stmt);
@@ -171,5 +174,29 @@ class product
                 secondary_image = :secondary_image,
                 updated_at = :updated_at
             WHERE id = :id;";
+    }
+
+    public function updatedTableRow(): string
+    {
+        $feature_image   = '/' . Statics::PROJECT_NAME . '/' . $this->feature_image;
+        $secondary_image = '/' . Statics::PROJECT_NAME . '/' . $this->secondary_image;
+        return "<tr>
+                <td>".$_SESSION['name'] ."</td>
+                <td>".$this->product_title ."</td>
+                <td><img class='content-center' width='150px' src='".$feature_image ."'</td>
+                <td>".$this->price ."</td>
+                <td>".$this->created_at ."</td>
+                <td>
+                    <a data-toggle='modal'
+                       data-product-id    = '$this->id'
+                       data-product-title = '$this->product_title'
+                       data-product-price = '$this->price'
+                       data-product-feature-image = '$feature_image'
+                       data-product-secondary-image = '$secondary_image'
+                       class='btn btn-info infoU productEditButton'>
+                       <span class='glyphicon glyphicon-file'></span>Edit</a>
+
+              </td>
+            </tr>";
     }
 }

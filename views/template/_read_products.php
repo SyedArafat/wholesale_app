@@ -25,7 +25,7 @@ if($num>0){
         else $secondary_image = "NoImage";
 
         // display user details
-        echo "<tr>";
+        echo "<tr id='$id'>";
         echo "<td>{$seller_name}</td>";
         echo "<td>{$product_title}</td>";
         echo "<td><img class='content-center' src='". $feature_image ."' width='150px'/></td>";
